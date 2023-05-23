@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Hide the scroll bar */
+.layout-outlet::-webkit-scrollbar {
+  display: none;
+}
+
+.layout-outlet {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.event-modal-background-image {
+  background-image: url("./app/assets/images/event-edit-user-background.png");
+}
+
+.grid-container::before {
+  content: "";
+  width: 0;
+  padding-bottom: 100%;
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.grid-container > *:first-child {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.main-navbar {
+  height: calc(100vh - 20px);
+}
+
+.camera-detect-image {
+  background-image: url("./app/assets/images/camera-detect-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  background-position: center;
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.grid-item {
+  transition: background-color 0.1s ease-in-out;
+}
+
+.day.today {
+  position: relative;
+  color: red;
+}
+
+.day.today::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  border: 2px solid red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.day.disabled {
+  color: #ccc;
+  pointer-events: none;
+}
+
+.day.selected {
+  background-color: black;
+  color: white;
+}
+
+.month-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.form-checkbox:checked::before {
+  content: "\2713";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #fff;
+}
+
+.custom-brown {
+  background-color: #7d3519;
+}
+
+/***************************** LINEAR COLORS ****************************/
+
+.dashboard_on_badge {
+  background: linear-gradient(180deg, #fefefe 0%, #e4e4e4 100%);
+}
+
+.dashboard_off_badge {
+  background: linear-gradient(180deg, #2b3b41 0%, #122329 100%);
+}
+
+.dashboard_on_bg {
+  background: linear-gradient(180deg, #1b2c33 0%, #3d4d53 100%);
+}
+
+.dashboard_off_bg {
+  background: linear-gradient(180deg, #1b2c33 0%, #3d4d53 100%);
+}
+
+.alarm_off_toggle_bg,
+.system_off_toggle_bg {
+  background: linear-gradient(90.28deg, #acb4b7 0.28%, #a9b7bc 99.81%);
+}
+
+.alarm_on_toggle_bg {
+  background: linear-gradient(90.28deg, #ffd3d3 0.28%, #ffabab 99.81%);
+}
+
+.system_on_toggle_bg {
+  background: linear-gradient(90.28deg, #c4ffdf 0.28%, #e6fff1 99.81%);
+}
+
+.alarm_off_toggle_badge,
+.system_off_toggle_badge {
+  background: radial-gradient(
+    97.22% 97.22% at 47.22% 0%,
+    #6e8993 0%,
+    #3d4d53 100%
+  );
+}
+
+.alarm_on_toggle_badge {
+  background: radial-gradient(
+    101.67% 101.67% at 51.61% -1.67%,
+    #e27373 0%,
+    #e22828 100%
+  );
+}
+
+.system_on_toggle_badge {
+  background: radial-gradient(
+    101.67% 101.67% at 51.61% -1.67%,
+    #51c285 0%,
+    #288754 100%
+  );
+}
+
+/***************************** NAVBAR AERO ****************************/
+
+.nav_open:before {
+  content: "";
+  position: absolute;
+  top: -104%;
+  left: -9px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-bottom-right-radius: 20px;
+  /*box-shadow: 0px -10px 0 0 #3D4D53;*/
+  box-shadow: 10px 0 0 0 #f0f0f1;
+}
+
+.nav_open:after {
+  content: "";
+  position: absolute;
+  top: 105%;
+  left: -8.5px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-top-right-radius: 20px;
+  /*box-shadow: 0px -10px 0 0 #3D4D53;*/
+  box-shadow: 10px 0 0 0 #f0f0f1;
+}
+
+.nav_close:before {
+  content: "";
+  position: absolute;
+  top: -79%;
+  left: 14px;
+  width: 18px;
+  height: 17px;
+  background-color: transparent;
+  border-bottom-left-radius: 20px;
+  /* box-shadow: 0px -10px 0 0 #3D4D53; */
+  box-shadow: -10px 0 0 0 #3d4d53;
+}
+
+.nav_close:after {
+  content: "";
+  position: absolute;
+  top: 95%;
+  left: 15px;
+  width: 16px;
+  height: 20px;
+  background-color: transparent;
+  border-top-left-radius: 20px;
+  /* box-shadow: 0px -10px 0 0 #3D4D53; */
+  box-shadow: -10px 0 0 0 #3d4d53;
+}
+
+.video-container-compressed {
+  transform: translateX(-160px) scale(0.84);
+}
+
+/*EDIT USER SELECT ROLE DOWN ICON*/
+
+.edit_user,
+.add_user {
+  background-image: url("./app/assets/icons/down.svg");
+  background-repeat: no-repeat;
+  background-position: top 20px right 20px;
+}

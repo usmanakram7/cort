@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../app/components/Navbar";
 import { Outlet } from "react-router-dom";
-import Dashboard from "../app/views/main/Dashboard";
 import Header from "../app/components/Header";
 
 export const MainLayout = () => {

@@ -7,7 +7,7 @@ export class users {
   static create(data: AddNewUserValidator): AxiosPromise<UserInterface> {
     return axiosInstance({
       url: "/users",
-      method: "Post",
+      method: "post",
       data,
     });
   }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { DeleteCameraThunk, camerasListThunk } from "../../thunks/camera.thunk";
+import { DeleteCameraThunk, CamerasListThunk } from "../../thunks/camera.thunk";
 import { useDispatch } from "../../store";
 const cross = require("../assets/icons/cross.svg");
 const lockImage = require("../../app/assets/images/basket.png");
@@ -17,7 +17,7 @@ const HandleCameraConfirmDelete = (props: Props): JSX.Element => {
 
   const handlesConfirmDelete = () => {
     dispatch(DeleteCameraThunk(props.id));
-    dispatch(camerasListThunk());
+    dispatch(CamerasListThunk());
   };
 
   // useEffect(() => {

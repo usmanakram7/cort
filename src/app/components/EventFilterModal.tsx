@@ -82,7 +82,7 @@ const EventFilterModal = (props: Props): JSX.Element => {
   return (
     <>
       <div className="w-full overflow-auto layout-outlet  bg-[#3D4D53]/50 flex items-center justify-center absolute top-0 left-0 right-0 bottom-0 z-10">
-        <div className="abc layout-outlet relative h-[92vh]  bg-[#fff] w-[520px]  flex px-[30px] py-[20px] flex-col rounded-xl">
+        <div className="overflow-auto layout-outlet relative h-[92vh]  bg-[#fff] w-[520px]  flex px-[30px] py-[20px] flex-col rounded-xl">
           <div className="flex justify-between items-center w-full">
             <h1 className="text-[20px] leading-[150%] font-semibold color-[#3D4D53]">
               By Cameras

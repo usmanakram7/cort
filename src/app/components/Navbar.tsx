@@ -38,7 +38,7 @@ const Navbar = () => {
     <>
       {openQRcode && <QRcodeGenerator handleQRcodeModal={handleQRcodeModal} />}
       <div
-        className={`relative h-[100%] bg-Primarycolor px-4 pt-6 pb-5 rounded-14px flex flex-col items-center justify-between transition-all duration-300 ${
+        className={`  relative h-[100%] bg-Primarycolor px-4 pt-6 pb-5 rounded-14px flex flex-col items-center justify-between transition-all duration-300 ${
           expanded ? " w-[90px] " : " w-[240px]"
         }`}
       >

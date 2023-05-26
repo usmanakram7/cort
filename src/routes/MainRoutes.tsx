@@ -23,6 +23,7 @@ const MainRoutes = () => {
           <Route path="/events" element={<Events />} />
           <Route path="/" element={<Navigate to={"/dashboard"} />} />
         </Route>
+        <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </BrowserRouter>
   );

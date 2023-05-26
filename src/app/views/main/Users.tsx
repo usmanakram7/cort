@@ -7,6 +7,7 @@ import { usersListThunk } from "../../../thunks";
 import { useDispatch, useSelector } from "../../../store";
 
 const Users = (): JSX.Element => {
+  //
   const [addNewUserModal, setAddNewUserModal] = useState(false);
   const handleModal = () => {
     setAddNewUserModal(!addNewUserModal);

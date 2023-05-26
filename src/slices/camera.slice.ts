@@ -1,6 +1,6 @@
 import { CamerasInterface } from "../shared/interfaces/CamerasInterface";
 import { createSlice } from "@reduxjs/toolkit";
-import { DeleteCameraThunk, camerasListThunk } from "../thunks/camera.thunk";
+import { DeleteCameraThunk, CamerasListThunk } from "../thunks/camera.thunk";
 
 interface UsersState {
   data: CamerasInterface[];
@@ -19,13 +19,13 @@ export const CameraSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // Clinics
     builder
-      .addCase(camerasListThunk.pending, (state) => {
+      .addCase(CamerasListThunk.pending, (state) => {
         state.loading = !state.data.length;
         state.error = null;
       })
-      .addCase(camerasListThunk.fulfilled, (state, { payload }) => {
+      .addCase(CamerasListThunk.fulfilled, (state, { payload }) => {
+        state.data = payload ?? [];
         if (payload) {
           if (payload.length) {
             if (payload[0].user) {
@@ -36,7 +36,7 @@ export const CameraSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(camerasListThunk.rejected, (state, action) => {
+      .addCase(CamerasListThunk.rejected, (state, action) => {
         if (action.payload) {
           state.error = action.payload;
         } else {

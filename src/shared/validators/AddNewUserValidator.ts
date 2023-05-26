@@ -1,8 +1,4 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-} from "class-validator";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class AddNewUserValidator {
   @IsString()
@@ -28,8 +24,8 @@ export class AddNewUserValidator {
 
   @IsString()
   @IsNotEmpty({ message: "Must enter the role" })
-  role: string;
+  roles: string;
 
-  // @IsNotEmpty({ message: "Must select at least one camera" })
-  // selectcamera: string;
+  @IsNotEmpty({ message: "Must select at least one camera" })
+  cameras: string;
 }

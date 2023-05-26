@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../api";
 
-export const camerasListThunk = createAsyncThunk(
+export const CamerasListThunk = createAsyncThunk(
   "cameras-thunk",
   async (data, thunkApi: any) => {
     try {

@@ -5,6 +5,7 @@ import { FormikValidator } from "../../../../shared/utility";
 import { FormikErrorMessage } from "../../../components/FormikErrorMessage";
 import { ApplicationProtocolEnum } from "../../../../shared/interfaces";
 import { API } from "../../../../api";
+import { useNavigate } from "react-router-dom";
 
 const AddNewCameraPage = (): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -20,6 +21,8 @@ const AddNewCameraPage = (): JSX.Element => {
   // const handleAnotherDivClick = (value) => {
   //   setSelectedOption(value);
   // };
+
+  const navigate = useNavigate();
 
   const NewCameraFormik = useFormik<AddNewCameraValidator>({
     initialValues: {
@@ -146,11 +149,16 @@ const AddNewCameraPage = (): JSX.Element => {
   return (
     <div className="w-full h-[100%] bg-white rounded-10px p-[20px]">
       <div className="flex gap-1">
-        <p className="text-[#0163E0] underline leading-[150%] font-medium text-[16px]">
+        <p
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="cursor-pointertext-[#0163E0] underline leading-[150%] font-medium text-[16px]"
+        >
           Cameras
         </p>
         <span className="textb">/</span>
-        <p className="text-[#0163E0] underline leading-[150%] font-medium text-[16px]">
+        <p className="text-[#bfbfbf] underline leading-[150%] font-medium text-[16px]">
           Add New Camera
         </p>
       </div>

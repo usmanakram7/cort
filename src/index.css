@@ -224,3 +224,37 @@
   background-repeat: no-repeat;
   background-position: top 20px right 20px;
 }
+
+/* 
+
+*/
+input[type="checkbox"] {
+  display: hidden;
+}
+
+input[type="checkbox"]:checked {
+  display: inline;
+  background-color: #7d3519;
+}
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #7d3519;
+  border-color: #7d3519;
+}
+
+/* Create the checkmark/indicator */
+.checkmark:after {
+  content: "\2713";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}

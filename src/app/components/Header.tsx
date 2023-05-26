@@ -98,11 +98,12 @@ const Header = () => {
           isAlarmToggled ? "bg-[#FEE1E1]" : "bg-white"
         } `}
       >
-        <div className="flex items-end ">
+        <div className="flex gap-[2px] items-end pr-3">
           <p className="font-poppins font-medium text-3xl not-italic leading[150%] text-Primarycolor">
             {formatTime(currentTime.hours, true)}:
             {formatTime(currentTime.minutes)}
           </p>
+
           <span className="mb-[2.5px] font-poppins font-medium text-sm not-italic leading[150%] text-Primarycolor">
             {""}: {formatTime(currentTime.seconds)}
             {currentTime.hours >= 12 ? "PM" : "AM"}
@@ -187,10 +188,10 @@ const Header = () => {
                 {adminDropdownOpen && (
                   <div
                     ref={adminDropdownRef}
-                    className="absolute top-[18px] right-[0px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10"
+                    className="absolute top-[18px] right-[0px] mt-2 w-48 bg-white  rounded-md shadow-header_shadow z-10"
                   >
                     <div
-                      className=" border border-r-white border-b-white rounded-sm absolute top-[3px] left-[83%] transform -translate-x-1/2 rotate-45  shadow-slate-950 w-4 h-4 bg-white -z-10 "
+                      className=" absolute top-[3px] left-[83%] transform -translate-x-1/2 rotate-45 w-4 h-4 bg-white -z-10 "
                       style={{ marginTop: "-0.65rem" }}
                     ></div>
                     <div className="py-1">

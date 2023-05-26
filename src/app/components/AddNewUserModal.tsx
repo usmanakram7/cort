@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditUserProfileModal from "./EditUserProfileModal";
 import EditPassword from "./EditPassword";
 import { useFormik } from "formik";
@@ -11,6 +11,8 @@ import closeeye from "../assets/icons/eyeclose.svg";
 import { FormikErrorMessage } from "./FormikErrorMessage";
 import { AddNewUserValidator } from "../../shared/validators/AddNewUserValidator";
 import { API } from "../../api";
+import { useDispatch, useSelector } from "../../store";
+import { CamerasListThunk } from "../../thunks/camera.thunk";
 const cross = require("../assets/images/close.png");
 const profile = require("../assets/images/no-profile.png");
 const arrowdown = require("../assets/images/arrow-down.png");
@@ -20,6 +22,27 @@ type Props = {
 };
 
 const AddNewUserModal = (props: Props): JSX.Element => {
+  //
+
+  const dispatch = useDispatch();
+  const cameras = useSelector((state) => state.camera);
+  console.log("camerasss ===> ", cameras);
+  useEffect(() => {
+    dispatch(CamerasListThunk());
+  }, []);
+
+  //
+  const [isChecked, setIsChecked] = useState({});
+
+  const handleClick = (index) => {
+    setIsChecked({
+      ...isChecked,
+      [index]: !isChecked[index],
+    });
+  };
+
+  //
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
@@ -32,70 +55,6 @@ const AddNewUserModal = (props: Props): JSX.Element => {
     setEditUserModal(!editUserModal);
   };
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handlesCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    console.log("Checkbox checked:", event.target.checked);
-  };
-
-  //
-  //
-  const [checkboxStates, setCheckboxStates] = useState({
-    camera1: false,
-    camera2: false,
-    camera3: false,
-    camera4: false,
-  });
-
-  const handleCheckboxChange = (name: string, checked: boolean) => {
-    setCheckboxStates({ ...checkboxStates, [name]: checked });
-  };
-
-  const renderCheckbox = (name: string, label: string) => (
-    <div
-      className={`border rounded-[10px] font-medium text-[14px] mt-[9px] flex py-[13px] px-[16px] items-center justify-between  ${
-        checkboxStates[name] ? "border-[#7D3519] " : "border-[#D8DBDD]"
-      }`}
-      onClick={() => handleCheckboxChange(name, !checkboxStates[name])}
-    >
-      <div className="flex gap-1.5 font-medium text-base">
-        <p
-          className={`text-[14px] font-medium text-${
-            checkboxStates[name] ? "[#7D3519]" : "[#3D4D53]"
-          }`}
-        >
-          {label}
-        </p>
-      </div>
-      {checkboxStates[name] && (
-        <>
-          <input
-            id="custom-checkbox"
-            type="checkbox"
-            checked={!isChecked}
-            onChange={handlesCheckboxChange}
-            className="hidden"
-          />
-          <span
-            className={`flex items-center justify-center w-5 h-5 border border-gray-400 rounded-md ${
-              !isChecked ? "bg-[#7D3519]" : "bg-white"
-            }`}
-          >
-            {!isChecked && (
-              <svg
-                className="w-3 h-3 mx-auto my-auto text-white fill-current"
-                viewBox="0 0 20 20"
-              >
-                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-              </svg>
-            )}
-          </span>
-        </>
-      )}
-    </div>
-  );
-
   const NewUserFormik = useFormik<AddNewUserValidator>({
     initialValues: {
       firstname: "",
@@ -103,8 +62,8 @@ const AddNewUserModal = (props: Props): JSX.Element => {
       email: "",
       phonenumber: "",
       password: "",
-      role: null,
-      //   selectcamera: "",
+      roles: null,
+      cameras: "",
     },
     onSubmit: (values) => {
       console.log("Submit Values ==>", values);
@@ -126,8 +85,8 @@ const AddNewUserModal = (props: Props): JSX.Element => {
       {editPasswordModal ? (
         <>
           {!editUserModal ? (
-            <div className="w-full layout-outlet bg-[#3D4D53]/50 flex  justify-center items-center absolute top-0 left-0 right-0 bottom-0 z-10">
-              <div className="layout-outlet h-[94vh] overflow-y-auto overflow-x-hidden relative  bg-white w-[570px] rounded-xl pb-4 ">
+            <div className=" w-full layout-outlet bg-[#3D4D53]/50 flex  justify-center items-center absolute top-0 left-0 right-0 bottom-0 z-10">
+              <div className="layout-outlet h-[94vh] overflow-y-auto overflow-x-hidden relative  bg-white w-[570px] rounded-xl  ">
                 <div className=" modal-inner-section-header">
                   <div className=" event-modal-background-image  bg-cover bg-center bg-no-repeat h-[120px] rounded-tl-xl rounded-tr-xl p-[10px]">
                     <div
@@ -161,8 +120,12 @@ const AddNewUserModal = (props: Props): JSX.Element => {
                     />
                   </div>
                 </div>
-                <div className=" w-full mt-[60px] px-[32px] ">
-                  <form action="" onSubmit={NewUserFormik.handleSubmit}>
+                <form
+                  className=" mt-[60px] px-[32px]"
+                  action=""
+                  onSubmit={NewUserFormik.handleSubmit}
+                >
+                  <div className=" w-full ">
                     <div className="grid grid-cols-2 gap-[10px] mt-[30px]">
                       <div>
                         <div>
@@ -364,31 +327,47 @@ const AddNewUserModal = (props: Props): JSX.Element => {
                         <label className="text-[#3D4D53] " htmlFor="">
                           Cameras
                         </label>
-                        {/* <FormikErrorMessage
-                          formik={NewUserFormik}
-                          name="selectcamera"
-                          render={(error) => (
-                            <span className="text-[12px] error mt-1 text-rose-500">
-                              {error}
-                            </span>
-                          )}
-                        /> */}
                       </div>
-                      <div className="grid grid-cols-2 gap-[10px] ">
-                        {renderCheckbox("camera1", "Camera 1")}
-                        {renderCheckbox("camera2", "Camera 2")}
-                        {renderCheckbox("camera3", "Camera 3")}
-                        {renderCheckbox("camera4", "Camera 4")}
+                      <div className="grid grid-cols-2 gap-[10px] mt-4">
+                        {cameras.data.map((items, index) => {
+                          return (
+                            <>
+                              <div
+                                key={index}
+                                onClick={() => handleClick(index)}
+                                className={`flex items-center justify-between border border-[#7D3519] rounded-[10px] px-4 py-3 cursor-pointer ${
+                                  isChecked[index]
+                                    ? " border border-[#7D3519]"
+                                    : "border-[#D8DBDD]"
+                                }`}
+                              >
+                                <p className="text-[#5D636E] text-[14px] ">
+                                  {items.name}
+                                </p>
+                                <label className="checkbox-container relative">
+                                  <input
+                                    type="checkbox"
+                                    checked={!!isChecked[index]} // The double not operator is used to convert undefined to false
+                                    onChange={() => handleClick(index)}
+                                    name="checkbox"
+                                    className="sr-only"
+                                  />
+                                  <span className="checkmark block rounded-[4px] w-[20px] h-[20px] "></span>
+                                </label>
+                              </div>
+                            </>
+                          );
+                        })}
                       </div>
                     </div>
                     <button
                       type="submit"
-                      className="float-right px-[26px]  py-[13px] text-white font-medium bg-[#7D3519] rounded-[10px] mt-[10px] "
+                      className="float-right px-[26px]   py-[13px] text-white font-medium bg-[#7D3519] rounded-[10px] mt-[10px] "
                     >
                       Add New User
                     </button>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
           ) : (
